@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PDV Web — Demo Node.js</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="auth" class="center">
+  <div class="card auth">
+    <header>
+      <div class="logo">Insane Market</div>
+      <div class="muted">Insane Market - All rights reserved.</div>
+    </header>
+    <div class="content stack">
+      <h3>Entrar</h3>
+      <div class="row">
+        <div>
+          <label>ID do usuário</label>
+          <input id="loginId" placeholder="ex: 1020" />
+        </div>
+        <div>
+          <label>Senha</label>
+          <input id="loginPass" type="password" placeholder="••••••" />
+        </div>
+      </div>
+      <button onclick="login()">Entrar</button>
+      <hr/>
+      <h3>Novo usuário</h3>
+      <div class="row">
+        <div>
+          <label>Nome</label>
+          <input id="regName" placeholder="Nome do operador" />
+        </div>
+        <div>
+          <label>Senha</label>
+          <input id="regPass" type="password" placeholder="Defina uma senha" />
+        </div>
+      </div>
+      <button onclick="registerUser()">Cadastrar e gerar ID</button>
+      <div id="authMsg" class="muted"></div>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="wrap hidden">
+  <!-- Lateral: Gestão -->
+  <aside class="card">
+    <header>
+      <div class="brand">Painel do Operador</div>
+      <div id="whoami" class="muted"></div>
+    </header>
+    <div class="content stack">
+      <h3>Mercados</h3>
+      <div class="row">
+        <input id="marketName" placeholder="Nome do mercado" />
+        <button onclick="addMarket()">Criar</button>
+      </div>
+      <div class="row">
+        <select id="marketSelect" onchange="setCurrentMarket(this.value)"></select>
+        <button class="secondary" onclick="removeMarket()">Remover</button>
+      </div>
+      <div class="muted">Mercado atual: <span id="marketCurrent" class="badge">—</span></div>
+      <hr/>
+      <h3>Produtos</h3>
+      <div class="row3">
+        <input id="prodName" placeholder="Nome" />
+        <input id="prodPrice" type="number" min="0" step="0.01" placeholder="Preço" />
+        <button onclick="addProduct()">Cadastrar</button>
+      </div>
+      <div class="muted">ID é gerado em ordem por mercado.</div>
+      <div class="scroll">
+        <table id="productTable">
+          <thead><tr><th>ID</th><th>Nome</th><th>Preço</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <hr/>
+      <button class="warn" onclick="logout()">Sair</button>
+    </div>
+  </aside>
+
+  <!-- Principal: PDV -->
+  <main class="card">
+    <header>
+      <div class="brand">PDV — Frente de Caixa</div>
+      <div class="muted">Registre itens pelo <b>ID</b>. Use desconto por item se necessário.</div>
+    </header>
+    <div class="content stack">
+      <div class="row3">
+        <input id="scanId" placeholder="ID do produto (ex: 001)" onkeydown="if(event.key==='Enter') addItemById()"/>
+        <input id="scanQty" type="number" min="1" step="1" value="1"/>
+        <button onclick="addItemById()">Adicionar item</button>
+      </div>
+      <div class="scroll">
+        <table id="cartTable">
+          <thead>
+            <tr>
+              <th>ID</th><th>Produto</th><th>Preço</th><th>Qtd</th><th>Desc (R$ ou %)</th><th>Subtotal</th><th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="totals">
+        <div>
+          <div class="muted">Total</div>
+          <div class="value" id="totalValue">R$ 0,00</div>
+          <div class="muted">A receber: <span id="dueValue" class="badge">R$ 0,00</span></div>
+        </div>
+        <div class="stack" style="min-width:360px">
+          <div class="row">
+            <select id="payMethod">
+              <option>Dinheiro</option>
+              <option>Débito</option>
+              <option>Crédito</option>
+              <option>Pix</option>
+            </select>
+            <input id="payAmount" type="number" min="0" step="0.01" placeholder="Valor a pagar agora" />
+          </div>
+          <div class="row">
+            <button onclick="addPayment()">Adicionar pagamento parcial</button>
+            <button class="warn" onclick="clearPayments()">Limpar pagamentos</button>
+          </div>
+          <div class="paylist" id="payments"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="danger" onclick="cancelSale()">Cancelar venda</button>
+        <button onclick="finalizeSale()">Finalizar venda</button>
+      </div>
+
+      <hr/>
+      <h3>Vendas</h3>
+      <div class="scroll">
+        <table id="salesTable">
+          <thead><tr><th>#</th><th>Data</th><th>Mercado</th><th>Itens</th><th>Total</th><th>Pagamentos</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="pill">Arrecadado: <b id="grandTotal">R$ 0,00</b></div>
+        <button class="secondary" onclick="exportCSV()">Exportar vendas (CSV / Excel)</button>
+      </div>
+    </div>
+    <div class="footer">Insane Market - All rights reserved.</div>
+  </main>
+</div>
+
+<!-- Scripts separados, ordem corrigida -->
+<script src="utils.js"></script>
+<script src="db.js"></script>
+<script src="pdv.js"></script>
+<script src="market.js"></script>
+<script src="auth.js"></script>
+
+<!-- Inicialização -->
+<script>
+  initAuth().then(() => {
+    renderMarkets?.();
+    renderProducts?.();
+    renderSales?.();
+  });
+</script>
+</body>
+</html>
