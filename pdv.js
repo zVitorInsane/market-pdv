@@ -89,7 +89,9 @@ function renderCart(){
   const t = total();
   $$('#totalValue').textContent = money(t);
   const paid = payments.reduce((s,p)=>s+p.amount,0);
-  $$('#dueValue').textContent = money(Math.max(0, t - paid));
+  let due = t - paid;
+  $$('#dueValue').textContent = money(due>0?due:0);
+
   renderPayments();
 }
 
@@ -107,8 +109,26 @@ function clearPayments(){ payments=[]; renderCart(); }
 
 function renderPayments(){
   const div = $$('#payments');
-  if(!payments.length){ div.innerHTML='<span class="muted">Sem pagamentos ainda.</span>'; return; }
-  div.innerHTML = payments.map((p,i)=>`<div class="pill">${p.method}: <b>${money(p.amount)}</b> <button class="secondary" onclick="payments.splice(${i},1); renderCart()">remover</button></div>`).join('');
+  if(!payments.length){ 
+    div.innerHTML='<span class="muted">Sem pagamentos ainda.</span>'; 
+    return; 
+  }
+
+  const t = total();
+  const cashPaid = payments.filter(p=>p.method==='Dinheiro').reduce((s,p)=>s+p.amount,0);
+  const troco = cashPaid > t ? cashPaid - t : 0;
+
+  div.innerHTML = payments.map((p,i)=>`<div class="pill">
+    ${p.method}: <b>${money(p.amount)}</b> 
+    <button class="secondary" onclick="payments.splice(${i},1); renderCart()">remover</button>
+  </div>`).join('');
+
+  if(troco>0){
+    const trocoDiv = document.createElement('div');
+    trocoDiv.className = 'pill';
+    trocoDiv.innerHTML = `<b>Troco a devolver:</b> ${money(troco)}`;
+    div.appendChild(trocoDiv);
+  }
 }
 
 // ===== Finalização =====

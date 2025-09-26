@@ -1,0 +1,267 @@
+{
+  "users": [
+    {
+      "id": "fsnlg4dyezb",
+      "name": "Carlos",
+      "pass": "1234",
+      "code": "8214"
+    }
+  ],
+  "markets": [
+    {
+      "id": "mo2d9lydv0b",
+      "name": "Associacao"
+    },
+    {
+      "id": "xxtqgiirfmg",
+      "name": ".."
+    }
+  ],
+  "products": [
+    {
+      "id": "001",
+      "name": "Cerveja",
+      "price": 4.5,
+      "marketId": "mo2d9lydv0b"
+    },
+    {
+      "id": "002",
+      "name": "Xis",
+      "price": 20,
+      "marketId": "mo2d9lydv0b"
+    },
+    {
+      "id": "003",
+      "name": "xBurger",
+      "price": 25,
+      "marketId": "mo2d9lydv0b"
+    }
+  ],
+  "sales": [
+    {
+      "id": 1,
+      "date": "2025-08-24T01:45:52.237Z",
+      "marketId": "mo2d9lydv0b",
+      "items": [
+        {
+          "id": "001",
+          "name": "Cerveja",
+          "price": 4.5,
+          "qty": 15,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 67.5
+        }
+      ],
+      "total": 67.5,
+      "payments": [
+        {
+          "method": "Dinheiro",
+          "amount": 500
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "date": "2025-08-24T03:00:20.824Z",
+      "marketId": "mo2d9lydv0b",
+      "items": [
+        {
+          "id": "001",
+          "name": "Cerveja",
+          "price": 4.5,
+          "qty": 24,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 108
+        }
+      ],
+      "total": 108,
+      "payments": [
+        {
+          "method": "Dinheiro",
+          "amount": 100
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "date": "2025-08-24T03:31:07.819Z",
+      "marketId": "mo2d9lydv0b",
+      "items": [
+        {
+          "id": "002",
+          "name": "Xis",
+          "price": 20,
+          "qty": 1,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 20
+        }
+      ],
+      "total": 20,
+      "payments": [
+        {
+          "method": "Dinheiro",
+          "amount": 10
+        },
+        {
+          "method": "Débito",
+          "amount": 10
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "date": "2025-08-24T03:31:31.084Z",
+      "marketId": "mo2d9lydv0b",
+      "items": [
+        {
+          "id": "001",
+          "name": "Cerveja",
+          "price": 4.5,
+          "qty": 1,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 4.5
+        }
+      ],
+      "total": 4.5,
+      "payments": [
+        {
+          "method": "Dinheiro",
+          "amount": 10
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "date": "2025-08-26T02:17:45.577Z",
+      "marketId": "mo2d9lydv0b",
+      "items": [
+        {
+          "id": "003",
+          "name": "xBurger",
+          "price": 25,
+          "qty": 1,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 25
+        },
+        {
+          "id": "001",
+          "name": "Cerveja",
+          "price": 4.5,
+          "qty": 1,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 4.5
+        }
+      ],
+      "total": 29.5,
+      "payments": [
+        {
+          "method": "Pix",
+          "amount": 29.5
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "date": "2025-08-27T01:43:18.227Z",
+      "marketId": "mo2d9lydv0b",
+      "items": [
+        {
+          "id": "001",
+          "name": "Cerveja",
+          "price": 4.5,
+          "qty": 1,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 4.5
+        },
+        {
+          "id": "002",
+          "name": "Xis",
+          "price": 20,
+          "qty": 1,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 20
+        }
+      ],
+      "total": 24.5,
+      "payments": [
+        {
+          "method": "Pix",
+          "amount": 16
+        },
+        {
+          "method": "Dinheiro",
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "date": "2025-08-28T04:07:59.048Z",
+      "marketId": "mo2d9lydv0b",
+      "items": [
+        {
+          "id": "001",
+          "name": "Cerveja",
+          "price": 4.5,
+          "qty": 1,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 4.5
+        },
+        {
+          "id": "002",
+          "name": "Xis",
+          "price": 20,
+          "qty": 1,
+          "discount": {
+            "type": "$",
+            "value": 0
+          },
+          "subtotal": 20
+        }
+      ],
+      "total": 24.5,
+      "payments": [
+        {
+          "method": "Dinheiro",
+          "amount": 50
+        }
+      ]
+    }
+  ],
+  "session": {
+    "userId": "fsnlg4dyezb",
+    "marketId": "mo2d9lydv0b"
+  },
+  "counters": {
+    "productIdByMarket": {
+      "mo2d9lydv0b": 3
+    }
+  }
+}
